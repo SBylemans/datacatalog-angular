@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="col-md-12 menu">
+        <div class="menutitle">Facet Search</div>
+        <div *ngFor="let element of elements">
+          <label>{{element.title}}</label>
+          <div *ngFor="let sub of element.subElements">
+            <input type="checkbox" [(ngModel)]="sub.checked" (ngModelChange)="facetedSearch(element, sub)"/>&nbsp;<span>{{sub.value}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="col-md-5 offset-md-1 datasources">
+        <div *ngFor="let d of getData()">
+          <li>{{d.name}}</li>
+          <span>{{d.freeText}}</span>
+          <div>
+            <div class="location" *ngFor="let location of d.meta['location']">
+              <i class="fa fa-map-marker"></i>&nbsp;<span>{{location}}</span>
+            </div>
+          </div>
+        </div>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-md-5 offset-md-3">
+      <p>Number of elements: {{data.length}}</p>
+      <input [(ngModel)]="searchTerm" type="text"/>
+      <button class="btn btn-primary" (click)="search()">Search</button>
+      <button class="btn" (click)="delete()">Delete Search</button><br/>
+      <button class="btn" routerLink="/datacatalog/add">Add datasource</button>
+    </div>
+  </div>
+</div>

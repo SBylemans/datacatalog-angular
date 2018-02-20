@@ -3,16 +3,27 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { DatacatalogComponent } from './datacatalog/datacatalog.component';
+import { DataService } from './data.service';
+import { HttpClientModule} from '@angular/common/http';
+import { DatacatalogAddComponent } from './datacatalog-add/datacatalog-add.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DatacatalogComponent,
+    DatacatalogAddComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

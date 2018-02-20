@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <form [(ngModel)]="data">
+    <div class="form-group">
+      <label>Name</label>
+      <input name="name" type="text"/><br/>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input name="freeText" type="text"/><br/>
+    </div>
+    <div class="form-group" *ngFor="let element of elements">
+      <label>{{element.title}}</label>
+      <select name="dataType">
+        <option [value]="t" *ngFor="let t of element.subElements">{{t.value}}</option>
+      </select><br/>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button class="btn">Cancel</button>
+    </div>
+  </form>
+</div>
