@@ -13,6 +13,7 @@
     </div>
 
     <ul class="col-md-5 offset-md-1 datasources">
+      <p>Number of datasources: {{getData().length}}</p>
         <div *ngFor="let d of getData()">
           <li>{{d.name}}</li>
           <span>{{d.freeText}}</span>
@@ -23,14 +24,11 @@
           </div>
         </div>
     </ul>
-  </div>
-  <div class="row">
-    <div class="col-md-5 offset-md-3">
-      <p>Number of elements: {{data.length}}</p>
-      <input [(ngModel)]="searchTerm" type="text"/>
-      <button class="btn btn-primary" (click)="search()">Search</button>
-      <button class="btn" (click)="delete()">Delete Search</button><br/>
-      <button class="btn" routerLink="/datacatalog/add">Add datasource</button>
+    <div class="col-md-4 form-group search-bar">
+      <input class="rounded" [(ngModel)]="searchTerm" type="text"/>
+      <i *ngIf="searchTerm && searchTerm !== ''" class="fa fa-times" (click)="delete()"></i>
+      <button class="btn btn-primary" (click)="search()"><i class="fa fa-search"></i></button>
+      <button class="btn" routerLink="/datacatalog/add" *ngIf="user.isAdmin()">Add datasource</button>
     </div>
   </div>
 </div>

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Data} from '../data';
 import {DataService} from '../data.service';
 import {Router} from '@angular/router';
 import {Option} from '../option';
 import {MenuElement} from '../menu-element';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-datacatalog-add',
@@ -12,8 +13,10 @@ import {MenuElement} from '../menu-element';
 })
 export class DatacatalogAddComponent implements OnInit {
 
-  data: Data ;
+  data: Data = {name: '', meta: new Map<string, string[]>(), freeText: ''};
   elements: MenuElement[] = [];
+
+  @ViewChild('dataSourceForm') public addForm: NgForm;
 
   constructor(private dataService: DataService, private router: Router) { }
 
@@ -39,8 +42,14 @@ export class DatacatalogAddComponent implements OnInit {
     });
   }
 
-  save() {
-    this.dataService.saveOne(this.data).subscribe(response =>
-      this.router.navigateByUrl('/'));
+  save(): void {
+    if (!this.addForm.invalid) {
+      this.dataService.saveOne(this.data).subscribe(response =>
+        this.router.navigateByUrl('/'));
+    }
+  }
+
+  cancel(): void {
+    this.router.navigateByUrl('/');
   }
 }

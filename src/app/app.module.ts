@@ -9,6 +9,7 @@ import { DataService } from './data.service';
 import { HttpClientModule} from '@angular/common/http';
 import { DatacatalogAddComponent } from './datacatalog-add/datacatalog-add.component';
 import {FormsModule} from '@angular/forms';
+import {AuthorizationService} from './authorization.service';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import {FormsModule} from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [DataService],
+  providers: [DataService, AuthorizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

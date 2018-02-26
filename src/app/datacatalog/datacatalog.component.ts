@@ -3,6 +3,9 @@ import { DataService} from '../data.service';
 import {Data} from '../data';
 import {Option} from '../option';
 import {MenuElement} from '../menu-element';
+import {Router} from '@angular/router';
+import {User} from '../user';
+import {AuthorizationService} from '../authorization.service';
 
 @Component({
   selector: 'app-datacatalog',
@@ -13,15 +16,17 @@ export class DatacatalogComponent implements OnInit {
 
   private data: Data[] = [];
   private facetedData: Data[];
+  user: User = new User('', []);
   elements: MenuElement[] = [];
   searchTerm: string;
 
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private authorizationService: AuthorizationService, private router: Router) { }
 
   ngOnInit() {
     this.dataService.getAll().subscribe(data => this.data = data);
     this.dataService.getFacetedSearch().subscribe(this.processFacetedSearchElements.bind(this));
+    this.authorizationService.getUser().subscribe(user => this.user = new User(user.name, user.roles));
   }
 
   processFacetedSearchElements(data: Option[]) {

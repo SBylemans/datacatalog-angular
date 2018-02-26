@@ -1,22 +1,28 @@
 <div class="container-fluid">
-  <form [(ngModel)]="data">
+  <form #dataSourceForm="ngForm" (ngSubmit)="save()">
     <div class="form-group">
       <label>Name</label>
-      <input name="name" type="text"/><br/>
+      <input [ngModel]="data?.name" (ngModelChange)="data.name" name="name" type="text" required #name="ngModel"/>
+      <span [hidden]="name.valid || !name.touched" class="error">
+        Name is required
+      </span>
     </div>
     <div class="form-group">
       <label>Description</label>
-      <input name="freeText" type="text"/><br/>
+      <input [ngModel]="data?.freeText" (ngModelChange)="data.freeText" name="freeText" type="text" required #freeText="ngModel"/>
+      <span [hidden]="freeText.valid || !freeText.touched" class="error">
+        A description is required
+      </span>
     </div>
     <div class="form-group" *ngFor="let element of elements">
       <label>{{element.title}}</label>
-      <select name="dataType">
+      <select [ngModel]="data?.meta[element.title]" (ngModelChange)="data.meta[element.title]" name="dataType">
         <option [value]="t" *ngFor="let t of element.subElements">{{t.value}}</option>
       </select><br/>
     </div>
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Save</button>
-      <button class="btn">Cancel</button>
+      <button class="btn" (click)="cancel()">Cancel</button>
     </div>
   </form>
 </div>

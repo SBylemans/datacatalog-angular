@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Data} from './data';
 import {Observable} from 'rxjs/Observable';
 import {Option} from './option';
@@ -28,7 +28,7 @@ export class DataService {
   }
 
   search(text: string): Observable<Data[]> {
-    return this.http.get<Data[]>('http://localhost:9995/api/search?text='+text);
+    return this.http.get<Data[]>('http://localhost:9995/api/search?text=' + text, httpOptions);
   }
 
   getFacetedSearch(): Observable<Option[]> {
