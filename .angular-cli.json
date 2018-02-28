@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "../datacatalog/src/main/resources/static",
       "assets": [
         "assets",
         "favicon.ico"
@@ -21,7 +21,7 @@
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/font-awesome/css/font-awesome.css",
-        "styles.css"
+        "styles.less"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

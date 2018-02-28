@@ -1,2 +1,30 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="navbar-brand">
+        <img src="/assets/img/HONEUR_logo.png" width="200"/> {{title}}
+      </div>
+    </div>
+    <ul class="nav navbar-nav mr-xl-auto" routerLinkActive="active">
+      <li class="nav-item"><a class="nav-link" routerLink="/datacatalog">Home</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/datacatalog/add" *ngIf="user && user.isAdmin()" >Add Datasource</a></li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 search-bar">
+      <input [(ngModel)]="searchTerm" class="form-control mr-sm-2" type="text" placeholder="Search" name="searchTerm"/>
+      <span><i *ngIf="searchTerm && searchTerm !== ''" class="fa fa-times" (click)="delete()"></i></span>
+      <button class="btn btn-primary" (click)="search()"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+</nav>
+
 <router-outlet></router-outlet>
+
+<p> </p>
+
+<!-- Footer -->
+<footer class="py-5">
+  <div class="container">
+    <p class="text-center">Copyright &copy; HONEUR 2018</p>
+  </div>
+</footer>
 

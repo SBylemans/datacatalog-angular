@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Data} from './data';
 import {Observable} from 'rxjs/Observable';
 import {Option} from './option';
+import {User} from './user';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,6 +15,8 @@ const httpOptions = {
 export class DataService {
 
   private dataUrl: string;
+
+  @Output() searchFor = new EventEmitter<string>();
 
   constructor(private http: HttpClient) {
     this.dataUrl = '/data';

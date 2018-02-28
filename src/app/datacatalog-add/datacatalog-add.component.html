@@ -1,26 +1,33 @@
 <div class="container-fluid">
   <form #dataSourceForm="ngForm" (ngSubmit)="save()">
-    <div class="form-group">
-      <label>Name</label>
-      <input [ngModel]="data?.name" (ngModelChange)="data.name" name="name" type="text" required #name="ngModel"/>
-      <span [hidden]="name.valid || !name.touched" class="error">
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Name</label>
+      <div class="col-md-10">
+        <input [ngModel]="data?.name" (ngModelChange)="data.name" name="name" type="text" required #name="ngModel"/>
+        <span [hidden]="name.valid || !name.touched" class="error">
         Name is required
       </span>
+      </div>
     </div>
-    <div class="form-group">
-      <label>Description</label>
-      <input [ngModel]="data?.freeText" (ngModelChange)="data.freeText" name="freeText" type="text" required #freeText="ngModel"/>
-      <span [hidden]="freeText.valid || !freeText.touched" class="error">
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Description</label>
+      <div class="col-md-10">
+        <input [ngModel]="data?.description" (ngModelChange)="data.description" name="description" type="text" required #description="ngModel"/>
+        <span [hidden]="description.valid || !description.touched" class="error">
         A description is required
       </span>
+      </div>
     </div>
-    <div class="form-group" *ngFor="let element of elements">
-      <label>{{element.title}}</label>
-      <select [ngModel]="data?.meta[element.title]" (ngModelChange)="data.meta[element.title]" name="dataType">
-        <option [value]="t" *ngFor="let t of element.subElements">{{t.value}}</option>
-      </select><br/>
+    <div class="form-group row" *ngFor="let element of elements">
+      <label class="col-md-2 col-form-label">{{element.title}}</label>
+      <div class="col-md-10">
+        <select [ngModel]="data?.meta[element.title]" (ngModelChange)="data.meta[element.title]" name="dataType">
+          <option [value]="t" *ngFor="let t of element.subElements">{{t.value}}</option>
+        </select>
+        <button class="btn btn-primary" routerLink="/options/add" *ngIf="user && user.isAdmin()">Add option</button>
+      </div>
     </div>
-    <div class="form-group">
+    <div class="form-group row">
       <button type="submit" class="btn btn-primary">Save</button>
       <button class="btn" (click)="cancel()">Cancel</button>
     </div>

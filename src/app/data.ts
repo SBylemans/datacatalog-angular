@@ -1,6 +1,6 @@
 export interface Data {
 
   name: string;
-  freeText: string;
+  description: string;
   meta: Map<string, string[]>;
 }

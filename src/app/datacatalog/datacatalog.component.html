@@ -16,7 +16,7 @@
       <p>Number of datasources: {{getData().length}}</p>
         <div *ngFor="let d of getData()">
           <li>{{d.name}}</li>
-          <span>{{d.freeText}}</span>
+          <span>{{d.description}}</span>
           <div>
             <div class="location" *ngFor="let location of d.meta['location']">
               <i class="fa fa-map-marker"></i>&nbsp;<span>{{location}}</span>
@@ -24,11 +24,11 @@
           </div>
         </div>
     </ul>
-    <div class="col-md-4 form-group search-bar">
-      <input class="rounded" [(ngModel)]="searchTerm" type="text"/>
-      <i *ngIf="searchTerm && searchTerm !== ''" class="fa fa-times" (click)="delete()"></i>
-      <button class="btn btn-primary" (click)="search()"><i class="fa fa-search"></i></button>
-      <button class="btn" routerLink="/datacatalog/add" *ngIf="user.isAdmin()">Add datasource</button>
-    </div>
+    <!--<div class="col-md-4 form-group search-bar">-->
+      <!--&lt;!&ndash;<input class="rounded" [(ngModel)]="searchTerm" type="text"/>&ndash;&gt;-->
+      <!--&lt;!&ndash;<i *ngIf="searchTerm && searchTerm !== ''" class="fa fa-times" (click)="delete()"></i>&ndash;&gt;-->
+      <!--&lt;!&ndash;<button class="btn btn-primary" (click)="search()"><i class="fa fa-search"></i></button>&ndash;&gt;-->
+      <!--<button class="btn" routerLink="/datacatalog/add" *ngIf="user.isAdmin()">Add datasource</button>-->
+    <!--</div>-->
   </div>
 </div>

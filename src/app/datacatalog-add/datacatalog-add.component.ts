@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {Option} from '../option';
 import {MenuElement} from '../menu-element';
 import {NgForm} from '@angular/forms';
+import {User} from '../user';
+import {AuthorizationService} from '../authorization.service';
 
 @Component({
   selector: 'app-datacatalog-add',
@@ -13,15 +15,19 @@ import {NgForm} from '@angular/forms';
 })
 export class DatacatalogAddComponent implements OnInit {
 
-  data: Data = {name: '', meta: new Map<string, string[]>(), freeText: ''};
+  data: Data = {name: '', meta: new Map<string, string[]>(), description: ''};
   elements: MenuElement[] = [];
+  user: User;
 
   @ViewChild('dataSourceForm') public addForm: NgForm;
 
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(private dataService: DataService, private authorizationService: AuthorizationService, private router: Router) {
+
+  }
 
   ngOnInit() {
     this.dataService.getFacetedSearch().subscribe(this.processFacetedSearchElements.bind(this));
+    this.authorizationService.getUser().subscribe(user => this.user = new User(user.name, user.roles));
   }
 
   processFacetedSearchElements(data: Option[]) {

@@ -16,9 +16,7 @@ export class DatacatalogComponent implements OnInit {
 
   private data: Data[] = [];
   private facetedData: Data[];
-  user: User = new User('', []);
   elements: MenuElement[] = [];
-  searchTerm: string;
 
 
   constructor(private dataService: DataService, private authorizationService: AuthorizationService, private router: Router) { }
@@ -26,7 +24,7 @@ export class DatacatalogComponent implements OnInit {
   ngOnInit() {
     this.dataService.getAll().subscribe(data => this.data = data);
     this.dataService.getFacetedSearch().subscribe(this.processFacetedSearchElements.bind(this));
-    this.authorizationService.getUser().subscribe(user => this.user = new User(user.name, user.roles));
+    this.dataService.searchFor.subscribe(this.search.bind(this));
   }
 
   processFacetedSearchElements(data: Option[]) {
@@ -54,10 +52,6 @@ export class DatacatalogComponent implements OnInit {
     return this.data;
   }
 
-  search() {
-    this.dataService.search(this.searchTerm).subscribe(data => this.data = data);
-  }
-
   facetedSearch(element: MenuElement, subElement: Option) {
     this.facetedData = this.data.filter(d => d.meta[element.title.toLowerCase()] &&
       d.meta[element.title.toLowerCase()].indexOf(subElement.value) >= 0);
@@ -73,9 +67,12 @@ export class DatacatalogComponent implements OnInit {
     }
   }
 
-  delete() {
-    delete this.searchTerm;
-    this.dataService.getAll().subscribe(data => this.data = data);
+  search(searchTerm: string) {
+    if (searchTerm === '') {
+      this.dataService.getAll().subscribe(data => this.data = data);
+    } else {
+      this.dataService.search(searchTerm).subscribe(data => this.data = data);
+    }
   }
 
 }
