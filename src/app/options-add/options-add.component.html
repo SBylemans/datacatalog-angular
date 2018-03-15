@@ -1,3 +1,27 @@
-<p>
-  options-add works!
-</p>
+<div class="container-fluid">
+  <form #optionsForm="ngForm" (ngSubmit)="save()">
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Key</label>
+      <div class="col-md-10">
+        <input [(ngModel)]="option.type" name="type" type="text" required #type="ngModel"/>
+        <span [hidden]="type.valid || !type.touched" class="error">
+        Key is required
+      </span>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Value</label>
+      <div class="col-md-10">
+        <input [(ngModel)]="option.value" name="value" type="text" required #value="ngModel"/>
+        <span [hidden]="value.valid || !value.touched" class="error">
+        A value is required
+      </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

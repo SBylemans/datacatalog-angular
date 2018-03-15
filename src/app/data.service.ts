@@ -37,4 +37,8 @@ export class DataService {
   getFacetedSearch(): Observable<Option[]> {
     return this.http.get<Option[]>('http://localhost:9995/api/options');
   }
+
+  saveOption(option: Option): Observable<Option> {
+    return this.http.post<Option>('http://localhost:9995/api/option', option, httpOptions);
+  }
 }
